@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('achivements', function (Blueprint $table) {
             $table->id();
+            $table->string('name_achivement');
+            $table->text('discription');
+            $table->string('icon');
+            $table->boolean('visible')->default(true);
             $table->timestamps();
         });
     }

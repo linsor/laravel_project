@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class achivement extends Model
+class Achivement extends Model
 {
     use HasFactory;
+    protected $table = 'achivements';
 }
