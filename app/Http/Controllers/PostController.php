@@ -17,18 +17,18 @@ class PostController extends Controller
     public function create() {
         $postsArr = [
             [
-                'title' => 'title of post from VS Code',
-                'content' => 'some interesting content',
-                'image' => 'Image.jpg',
+                'title' => 'Laravel project',
+                'content' => 'Protected',
+                'image' => 'Image3.jpg',
                 'likes' => 20,
-                'is_published' => 1,
+                'is_published' => 0,
             ],
             [
-                'title' => 'another title of post from VS Code',
-                'content' => 'some interesting content',
-                'image' => 'Image.jpg',
-                'likes' => 590,
-                'is_published' => 1,
+                'title' => 'Imerges',
+                'content' => 'Sim',
+                'image' => 'Image4.jpg',
+                'likes' => 10,
+                'is_published' => 0,
             ]
         ];
         foreach($postsArr as $iten) {
@@ -50,4 +50,11 @@ class PostController extends Controller
         dd('updated');
     }
 
+    public function delete() {
+        $posts = Post::withTrashed()->Where('is_published',1)->get();
+        foreach ($posts as $post) {
+            $post->delete();
+        }
+        dd('delete');
+    }
 }
