@@ -57,4 +57,49 @@ class PostController extends Controller
         }
         dd('delete');
     }
+
+    public function firstOrCreate () {
+
+
+        $anotherPost = [
+            'title' => 'Some post',
+            'content' => 'Some',
+            'image' => 'Some.jpg',
+            'likes' => 20000,
+            'is_published' => 1,
+        ];
+        $post = Post::firstOrCreate([
+            'title' => 'Some post'
+        ],[
+            'title' => 'Some post',
+            'content' => 'Some',
+            'image' => 'Some.jpg',
+            'likes' => 20000,
+            'is_published' => 1,
+        ]);
+        dump($post->content);
+        dd("end");
+    }
+    public function updateOrCreate () {
+
+        $anotherPost = [
+            'title' => 'updateOrCreate post',
+            'content' => 'updateOrCreateSome',
+            'image' => 'updateOrCreate Some.jpg',
+            'likes' => 200,
+            'is_published' => 1,
+        ];
+
+        $post = Post::updateOrCreate([
+            'likes' => 23
+        ],[
+            'title' => 'Laravel projecter',
+            'content' => 'Publik',
+            'image' => 'updateOrCreateLaravelprojecter.jpg',
+            'likes' => 235,
+            'is_published' => 1,
+        ]);
+        dump($post->title);
+        dd("update");
+    }
 }
