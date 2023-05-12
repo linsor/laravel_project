@@ -7,7 +7,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\Post;
 
-class ContactsController extends BaseController
+class ContactController extends BaseController
 {
-    
+  public function index() {
+    return view('contacts');
+  }
 }

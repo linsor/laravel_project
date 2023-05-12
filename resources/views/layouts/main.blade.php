@@ -7,6 +7,18 @@
   <title>Document</title>
 </head>
 <body>
+  <div>
+    <div>
+      <nav>
+       <ul>
+         <li><a href="{{route('main.index')}}">Main</a></li>
+         <li><a href="{{route('about.index')}}">About</a></li>
+         <li><a href="{{route('contact.index')}}">Contacts</a></li>
+         <li><a href="{{route('post.index')}}">Post</a></li>
+        </ul>
+     </nav>
+    </div>
+  </div>
   @yield('content')
 </body>
 </html>
