@@ -4,56 +4,48 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Doctrine\DBAL\Schema\Index;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index() {
-        $posts = DB::all();
-        return view('posts',compact('posts'));
+        $posts = Post::all();
+        return view('post/index',compact('posts'));
     }
     public function create() {
-        $postsArr = [
-            [
-                'title' => 'Laravel project',
-                'content' => 'Protected',
-                'image' => 'Image3.jpg',
-                'likes' => 20,
-                'is_published' => 0,
-            ],
-            [
-                'title' => 'Imerges',
-                'content' => 'Sim',
-                'image' => 'Image4.jpg',
-                'likes' => 10,
-                'is_published' => 0,
-            ]
-        ];
-        foreach($postsArr as $iten) {
-            Post::create($iten);
-        }
-
-        dd('created');
+        $posts = Post::all();
+        return view('post/create');
     }
-    public function update() {
-        $post = Post::find(13);
 
-        $post-> update([
-            'title' => 'update title of post from VS Code',
-            'content' => 'update some interesting content',
-            'image' => 'update Image.jpg',
-            'likes' => 590,
-            'is_published' => 1,
+    public function show (Post $post) {
+        return view('post/show', compact('post'));  
+    }
+    public function edit (Post $post) {
+        return view('post/edit', compact('post'));
+    }
+    public function store () {
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string'
         ]);
-        dd('updated');
+        Post::create($data);
+        return redirect()->route('post.index');
+    }
+    public function update(Post $post) {
+        $data = request()->validate([
+            'title' => 'string',
+            'content' => 'string',
+            'image' => 'string'
+        ]);
+        $post->update($data);
+        return redirect()->route('post.show', $post->id);
     }
 
-    public function delete() {
-        $posts = Post::withTrashed()->Where('is_published',1)->get();
-        foreach ($posts as $post) {
-            $post->delete();
-        }
-        dd('delete');
+    public function destroy(Post $post) {
+        $post->delete();
+        return redirect()->route('post.index');
     }
 
     public function firstOrCreate () {
