@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::all();
+        $posts = DB::all();
         return view('posts',compact('posts'));
     }
     public function create() {
@@ -100,3 +101,4 @@ class PostController extends Controller
         dd("update");
     }
 }
+
