@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
@@ -24,7 +25,9 @@ Route::get('/', function () {
 });
 
 
-
+Route::get('/game', [GameController::class, 'index']) ->name('game.index');
+Route::get('/games/create',[GameController::class, 'create']) ->name('game.create');
+Route::post('/games', [GameController::class, 'store'])->name('game.store');
 
 Route::get('/post', [PostController::class, 'index']) ->name('post.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Doctrine\DBAL\Schema\Index;
@@ -10,8 +12,13 @@ use Illuminate\Support\Facades\DB;
 class PostController extends Controller
 {
     public function index() {
-        $posts = Post::all();
-        return view('post/index',compact('posts'));
+ 
+        $post = Post::find(1);
+        $tag = Tag::find(1); 
+        dd($tag->posts);
+
+
+        //return view('post/index',compact('posts'));
     }
     public function create() {
         $posts = Post::all();
