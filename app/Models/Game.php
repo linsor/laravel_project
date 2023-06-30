@@ -10,6 +10,8 @@ class Game extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    
     protected $table = 'game';
+    
     protected $guarded = [];
 }

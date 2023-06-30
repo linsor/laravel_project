@@ -11,14 +11,10 @@ class PostController extends Controller
 {
     public function index() {
  
-        $posts = Post::find(1);
-        $category = Category::find(1);
-        $tag = Tag::find(1);
-        dd($posts->tags);
+        $posts = Post::all();
         return view('post/index',compact('posts'));
     }
     public function create() {
-        $posts = Post::all();
         $tags = Tag::all();
         $categories = Category::all();
         return view('post/create', compact('categories' , 'tags'));

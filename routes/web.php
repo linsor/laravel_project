@@ -6,6 +6,8 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\GameController;
+use Doctrine\DBAL\Schema\Index;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
 
@@ -24,18 +26,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['namespace' => 'App\Http\Controllers\Post'], function () {
+    Route::get('/post', IndexController::class)->name('post.index');
+    Route::get('/posts/create', CreateController::class)->name('post.create');
+    Route::post('/posts', StoreController::class)->name('post.store');
+    Route::get('/posts/{post}', ShowController::class)->name('post.show');
+    Route::get('/posts/{post}/edit', EditController::class)->name('post.edit');
+    Route::patch('/posts/{post}', UpdateController::class)->name('post.update');
+    Route::delete('/posts/{post}', DeleteController::class)->name('post.delete');
+});
 
 Route::get('/game', [GameController::class, 'index']) ->name('game.index');
 Route::get('/games/create',[GameController::class, 'create']) ->name('game.create');
 Route::post('/games', [GameController::class, 'store'])->name('game.store');
 
-Route::get('/post', [PostController::class, 'index']) ->name('post.index');
-Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
-Route::post('/posts', [PostController::class, 'store'])->name('post.store');
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
-Route::patch('/posts/{post}', [PostController::class, 'update'])->name('post.update');
-Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('post.delete');
 
 Route::get('/posts/update', [PostController::class, 'update']);
 Route::get('/posts/delete', [PostController::class, 'delete']);
