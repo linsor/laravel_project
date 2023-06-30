@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Tag;
-use Illuminate\Http\Request;
 use App\Models\Post;
-use App\Models\PostTag;
-use Doctrine\DBAL\Schema\Index;
-use Illuminate\Support\Facades\DB;
+
 
 class PostController extends Controller
 {
     public function index() {
  
-        $posts = Post::all();
+        $posts = Post::find(1);
+        $category = Category::find(1);
+        $tag = Tag::find(1);
+        dd($posts->tags);
         return view('post/index',compact('posts'));
     }
     public function create() {
