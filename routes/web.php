@@ -10,6 +10,13 @@ use Doctrine\DBAL\Schema\Index;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Schema;
+use App\Http\Controllers\Post\IndexController;
+use App\Http\Controllers\Post\CreateController;
+use App\Http\Controllers\Post\StoreController;
+use App\Http\Controllers\Post\ShowController;
+use App\Http\Controllers\Post\EditController;
+use App\Http\Controllers\Post\UpdateController;
+use App\Http\Controllers\Post\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,14 +33,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::group(['namespace' => 'App\Http\Controllers\Post'], function () {
-    Route::get('/posts', IndexController::class)->name('post.index');
-    Route::get('/posts/create', CreateController::class)->name('post.create');
-    Route::post('/posts', StoreController::class)->name('post.store');
-    Route::get('/posts/{post}', ShowController::class)->name('post.show');
-    Route::get('/posts/{post}/edit', EditController::class)->name('post.edit');
-    Route::patch('/posts/{post}', UpdateController::class)->name('post.update');
-    Route::delete('/posts/{post}', DeleteController::class)->name('post.delete');
+Route::group(['namespace' => 'Post'], function () {
+    Route::get('/posts', [IndexController::class, '__invoke'])->name('post.index');
+    Route::get('/posts/create', [CreateController::class, '__invoke'])->name('post.create');
+    Route::post('/posts', [StoreController::class, '__invoke'])->name('post.store');
+    Route::get('/posts/{post}', [ShowController::class, '__invoke'])->name('post.show');
+    Route::get('/posts/{post}/edit', [EditController::class, '__invoke'])->name('post.edit');
+    Route::patch('/posts/{post}', [UpdateController::class, '__invoke'])->name('post.update');
+    Route::delete('/posts/{post}', [DeleteController::class, '__invoke'])->name('post.delete');
 });
 
 Route::get('/game', [GameController::class, 'index']) ->name('game.index');
