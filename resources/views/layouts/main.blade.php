@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel= "stylesheet" href="{{asset('build/assets/app-3ea8b221.css')}}">
+  <link rel= "stylesheet" href="{{asset('build/assets/app-71455456.css')}}">
+  
   <title>Document</title>
 </head>
 <body>
@@ -26,6 +27,11 @@
               <li class="nav-item">
                 <a class="nav-link"href="{{route('post.index')}}">Post</a>
               </li>
+              @can('view', auth()->user())
+                <li class="nav-item">
+                  <a class="nav-link"href="{{route('admin.post.index')}}">Admin</a>
+                </li>
+              @endcan
             </ul>
           </div>
         </div>
